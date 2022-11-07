@@ -10,21 +10,57 @@
 
 void main()
 {
-  TDynamicMatrix<int> a(5), b(5), c(5);
-  int i, j;
-
   setlocale(LC_ALL, "Russian");
   cout << "Тестирование класс работы с матрицами"
     << endl;
-  for (i = 0; i < 5; i++)
-    for (j = i; j < 5; j++ )
-    {
-      a[i][j] =  i * 10 + j;
-      b[i][j] = (i * 10 + j) * 100;
-    }
-  c = a + b;
-  cout << "Matrix a = " << endl << a << endl;
-  cout << "Matrix b = " << endl << b << endl;
-  cout << "Matrix c = a + b" << endl << c << endl;
+  cout << "Введите размерность матрицы: ";
+  size_t sz = 0;
+  cin >> sz;
+  TDynamicMatrix<int> a(sz), b(sz), c(sz);
+  int num = 0;
+  cout << "Введите первую матрицу: ";
+  cin >> a;
+  cout << "Выберите операцию: " << endl;
+  cout << "1.Матрица + матрица" << endl;
+  cout << "2.Матрица * число" << endl;
+  cout << "3.Матрица * матрица" << endl;
+  size_t choose = 0;
+  cin >> choose;
+  switch (choose) 
+  {
+  case 1:
+      cout << "Введите вторую матрицу: ";
+      cin >> b;
+      cout << a << endl;
+      cout << "\t + " << "\n\n";
+      cout << b << endl;
+      cout << "\t = " << "\n\n";
+      c = a + b;
+      cout << c << endl;
+      break;
+  case 2:
+      cout << "Введите число: ";
+      cin >> num;
+      cout << a << endl;
+      cout << "\t * " << "\n\n";
+      cout << "\t" << num << "\n\n";
+      cout << "\t = " << "\n\n";
+      c = a * num;
+      cout << c << endl;
+      break;
+  case 3:
+      cout << "Введите вторую матрицу: ";
+      cin >> b;
+      cout << a << endl;
+      cout << "\t * " << "\n\n";
+      cout << b << endl;
+      cout << "\t = " << "\n\n";
+      c = a * b;
+      cout << c << endl;
+      break;
+  default:
+      cout << "Неверный номер!";
+      break;
+  }
 }
 //---------------------------------------------------------------------------
