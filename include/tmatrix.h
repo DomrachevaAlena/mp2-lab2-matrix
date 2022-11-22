@@ -26,7 +26,7 @@ protected:
 public:
   TDynamicVector(size_t size = 1) : sz(size)
   {
-    if (sz < 0 || sz > MAX_VECTOR_SIZE)
+    if (sz == 0 || sz > MAX_VECTOR_SIZE)
       throw out_of_range("Vector size should be greater than zero and lower than MAX_VECTOR_SIZE");
     pMem = new T[sz]();// {}; // У типа T д.б. констуктор по умолчанию
   }
@@ -84,7 +84,7 @@ public:
   // индексация с контролем
   T& at(size_t ind)
   {
-      if (ind < 0 || ind > MAX_VECTOR_SIZE)
+      if (ind >= sz)
       {
           throw exception("Index is incorrect");
       }
@@ -92,7 +92,7 @@ public:
   }
   const T& at(size_t ind) const
   {
-      if (ind < 0 || ind > MAX_VECTOR_SIZE)
+      if (ind >= sz)
       {
           throw exception("Index is incorrect");
       }
@@ -222,7 +222,7 @@ class TDynamicMatrix : private TDynamicVector<TDynamicVector<T>>
 public:
   TDynamicMatrix(size_t s = 1) : TDynamicVector<TDynamicVector<T>>(s)
   {
-    if (s < 0 || s > MAX_MATRIX_SIZE)
+    if (s == 0 || s > MAX_MATRIX_SIZE)
       throw out_of_range("Matrix size should be greater than zero and lower than MAX_MATRIX_SIZE");
     for (size_t i = 0; i < sz; i++)
       pMem[i] = TDynamicVector<T>(sz);
@@ -242,7 +242,7 @@ public:
   // индексация с контролем
   T& at(size_t ind1, size_t ind2)
   {
-      if ((ind1 < 0 || ind1 > MAX_MATRIX_SIZE)||(ind2 < 0 || ind2 > MAX_MATRIX_SIZE))
+      if ((ind1 > MAX_MATRIX_SIZE)||(ind2 > MAX_MATRIX_SIZE))
       {
           throw exception("Index is incorrect");
       }
@@ -250,7 +250,7 @@ public:
   }
   const T& at(size_t ind1, size_t ind2) const
   {
-      if ((ind1 < 0 || ind1 > MAX_MATRIX_SIZE) || (ind2 < 0 || ind2 > MAX_MATRIX_SIZE))
+      if ((ind1 > MAX_MATRIX_SIZE) || (ind2 > MAX_MATRIX_SIZE))
       {
           throw exception("Index is incorrect");
       }
